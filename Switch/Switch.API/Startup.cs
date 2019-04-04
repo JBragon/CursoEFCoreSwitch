@@ -10,17 +10,16 @@ namespace Switch.API
 {
     public class Startup
     {
-        IConfiguration _configuration { get; set; }
+        IConfiguration Configuration { get; set; }
         public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
-            _configuration = builder.Build();
+            Configuration = configuration;
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            var conn = _configuration.GetConnectionString("SwitchDB");
+            var conn = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<SwitchContext>(
                 option => option.UseLazyLoadingProxies().UseMySql(conn, m => m.MigrationsAssembly("Switch.Infra.Data"))
