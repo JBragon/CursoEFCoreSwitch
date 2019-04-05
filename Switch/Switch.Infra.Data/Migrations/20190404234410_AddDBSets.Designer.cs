@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Switch.Infra.Data.Context;
 
 namespace Switch.Infra.Data.Migrations
 {
     [DbContext(typeof(SwitchContext))]
-    partial class SwitchContextModelSnapshot : ModelSnapshot
+    [Migration("20190404234410_AddDBSets")]
+    partial class AddDBSets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,35 +89,11 @@ namespace Switch.Infra.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(400);
+                    b.Property<string>("Descricao");
 
                     b.HasKey("Id");
 
                     b.ToTable("StatusRelacionamento");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Descricao = "Nao Especificado"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Descricao = "Solteiro"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Descricao = "Casado"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Descricao = "Em Relacionamento Sério"
-                        });
                 });
 
             modelBuilder.Entity("Switch.Domain.Entities.Usuario", b =>
